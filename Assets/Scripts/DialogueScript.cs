@@ -69,8 +69,6 @@ public class DialogueScript : MonoBehaviour
         }
 
         // TODO - Timer-based single-character output (typing effect)
-
-        TESTDRIVE();
     }
 
     /// <summary>
@@ -97,14 +95,5 @@ public class DialogueScript : MonoBehaviour
 
         // Freeze time while dialogue box is open
         Time.timeScale = 0.0f;
-    }
-
-    void TESTDRIVE()
-    {
-        // TEMPORARY TEST FUNC
-        if (Input.GetKeyDown(KeyCode.D))
-        {
-            ShowDialogue(1, 3);
-        }
     }
 }

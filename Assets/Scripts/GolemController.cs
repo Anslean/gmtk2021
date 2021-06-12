@@ -38,7 +38,7 @@ public class GolemController : MonoBehaviour
             character = (Character)(((int)character + 1) % 3);
         }
 
-        if (Input.GetKey(KeyCode.Space))
+        if (Input.GetButton("Jump"))
         {
             if (!jump.aerial && jump.available)
             {
@@ -73,8 +73,8 @@ public class GolemController : MonoBehaviour
             }
         }
 
-        jump.available = Input.GetKeyUp("space") || jump.available;
-        float horizontal = (Input.GetKey(KeyCode.A) ? -walkSpeed : 0) + (Input.GetKey(KeyCode.D) ? walkSpeed : 0);
+        jump.available = Input.GetButtonUp("Jump") || jump.available;
+        float horizontal = (Input.GetAxis("Horizontal") < -0.1f ? -walkSpeed : 0) + (Input.GetAxis("Horizontal") > 0.1f ? walkSpeed : 0);
         float vertical = (jump.active && jump.progress > 0) ? jumpHeight : (rb.velocity.y < -fallSpeed ? -fallSpeed : rb.velocity.y);
         rb.velocity = new Vector2(horizontal, vertical);
         jump.active &= (jump.progress >= 1);
