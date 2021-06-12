@@ -1,3 +1,5 @@
 Hi there!
 This is a test of the dialogue system.  What do you think?
 Lots of potential here.  Stay tuned!
+But wait, there's more dialogue?  Will this part ever be reached?
+The answer is no, it won't. :c
