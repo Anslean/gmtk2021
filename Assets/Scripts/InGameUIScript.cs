@@ -11,6 +11,7 @@ public class InGameUIScript : MonoBehaviour
 
     public Button continueButton;
     public Button quitButton;
+    public Slider volumeSlider;
 
     // Start is called before the first frame update
     void Start()
@@ -22,6 +23,7 @@ public class InGameUIScript : MonoBehaviour
         // Set up buttons
         continueButton.onClick.AddListener(ContinueClicked);
         quitButton.onClick.AddListener(QuitClicked);
+        volumeSlider.onValueChanged.AddListener(ChangeVolume);
     }
 
     // Update is called once per frame
@@ -62,5 +64,11 @@ public class InGameUIScript : MonoBehaviour
     {
         Application.Quit();
         print("Game quit called");
+    }
+
+    // Change the global game volume
+    void ChangeVolume(float vol)
+    {
+        AudioListener.volume = vol;
     }
 }
