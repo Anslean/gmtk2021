@@ -17,6 +17,7 @@ public class InGameUIScript : MonoBehaviour
     void Start()
     {
         // Start unpaused
+        pauseGroup.interactable = false;
         pauseGroup.alpha = 0;
         isPaused = false;
 
@@ -40,6 +41,7 @@ public class InGameUIScript : MonoBehaviour
     {
         if (!isPaused)
         {
+            pauseGroup.interactable = true;
             pauseGroup.alpha = 1;
             Time.timeScale = 0.0f;
             isPaused = true;
@@ -47,6 +49,7 @@ public class InGameUIScript : MonoBehaviour
         }
         else
         {
+            pauseGroup.interactable = false;
             pauseGroup.alpha = 0;
             Time.timeScale = 1.0f;
             isPaused = false;

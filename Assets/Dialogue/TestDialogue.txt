@@ -1,0 +1,3 @@
+Hi there!
+This is a test of the dialogue system.  What do you think?
+Lots of potential here.  Stay tuned!
