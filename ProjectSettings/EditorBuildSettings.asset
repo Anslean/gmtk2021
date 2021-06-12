@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
+    path: Assets/Scenes/PuzzleMap.unity
+    guid: 2135824ce34401a4288b4bd5f43d4cc5
+  - enabled: 1
+    path: Assets/Scenes/BossMap.unity
+    guid: 31361f778ecf11941bc7cb603807739b
   m_configObjects: {}
