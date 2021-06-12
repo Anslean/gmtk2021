@@ -56,9 +56,10 @@ public class DialogueScript : MonoBehaviour
             currentPos++;
             if (currentPos > endPos)
             {
-                // Dialogue done; close the box
+                // Dialogue done; close the box and unfreeze time
                 dialogueBox.GetComponent<CanvasGroup>().alpha = 0;
                 dialogueOpen = false;
+                Time.timeScale = 1.0f;
             }
             else
             {
@@ -93,6 +94,9 @@ public class DialogueScript : MonoBehaviour
         dialogueText.text = currentLines[currentPos];
         dialogueBox.GetComponent<CanvasGroup>().alpha = 1;
         dialogueOpen = true;
+
+        // Freeze time while dialogue box is open
+        Time.timeScale = 0.0f;
     }
 
     void TESTDRIVE()
