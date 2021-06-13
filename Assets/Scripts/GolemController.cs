@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using static Character;
 
 public class GolemController : MonoBehaviour
@@ -21,6 +22,10 @@ public class GolemController : MonoBehaviour
     private Rigidbody2D rb;
     private Transform t;
 
+    public InGameUIScript inGameUI;
+
+    public int deathY;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -36,9 +41,10 @@ public class GolemController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Q)) {
             character = (Character)(((int)character + 1) % 3);
+            UpdateCharacterLabel();
         }
 
-        if (Input.GetButton("Jump"))
+        if (Input.GetButton("Jump") && Time.timeScale > 0.0f)
         {
             if (!jump.aerial && jump.available)
             {
@@ -73,7 +79,7 @@ public class GolemController : MonoBehaviour
             }
         }
 
-        jump.available = Input.GetButtonUp("Jump") || jump.available;
+        jump.available = (Input.GetButtonUp("Jump") || jump.available) && Time.timeScale > 0.0f;
         float horizontal = (Input.GetAxis("Horizontal") < -0.1f ? -walkSpeed : 0) + (Input.GetAxis("Horizontal") > 0.1f ? walkSpeed : 0);
         float vertical = (jump.active && jump.progress > 0) ? jumpHeight : (rb.velocity.y < -fallSpeed ? -fallSpeed : rb.velocity.y);
         rb.velocity = new Vector2(horizontal, vertical);
@@ -101,6 +107,13 @@ public class GolemController : MonoBehaviour
                     jump.active = true;
                     break;
             }
+        }
+
+        // Kill player if they fall too far
+        if (transform.position.y < deathY)
+        {
+            // TODO - show some epic "u died" dialogue
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
     }
 
@@ -199,6 +212,23 @@ public class GolemController : MonoBehaviour
                     ability.available = true;
                     break;
             }
+        }
+    }
+
+    // Update the UI label based on the current character
+    void UpdateCharacterLabel()
+    {
+        switch (character)
+        {
+            case Character.SmolBoi:
+                inGameUI.SetCharacterText("Bree (Dash)", Color.cyan);
+                break;
+            case Character.Steven:
+                inGameUI.SetCharacterText("Ellistair (Double Jump)", Color.yellow);
+                break;
+            case Character.LorgeBoi:
+                inGameUI.SetCharacterText("Vellsua (Ground-pound)", Color.magenta);
+                break;
         }
     }
 }

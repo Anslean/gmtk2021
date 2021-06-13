@@ -1164,6 +1164,7 @@ MonoBehaviour:
   continueButton: {fileID: 384821621687675198}
   quitButton: {fileID: 2448656834241308055}
   volumeSlider: {fileID: 5338123225206353389}
+  characterText: {fileID: 2964583873206430988}
 --- !u!1 &7987738573365022212
 GameObject:
   m_ObjectHideFlags: 0
@@ -1176,7 +1177,7 @@ GameObject:
   - component: {fileID: 4041122975708295495}
   - component: {fileID: 2964583873206430988}
   m_Layer: 5
-  m_Name: GameName
+  m_Name: CharacterLabel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1222,7 +1223,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1231,7 +1232,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: eb2a294c814d9374a96aad1743f94020, type: 3}
-    m_FontSize: 40
+    m_FontSize: 44
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
@@ -1242,7 +1243,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Haha game go vroom
+  m_Text: Vellsua (Ground-pound)
 --- !u!1 &9147160649453162263
 GameObject:
   m_ObjectHideFlags: 0
@@ -1276,7 +1277,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: -0.00012207031, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
