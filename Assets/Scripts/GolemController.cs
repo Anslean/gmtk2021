@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 using static Character;
 
@@ -25,6 +26,7 @@ public class GolemController : MonoBehaviour
 
     private Rigidbody2D rb;
     private Transform t;
+    private int trySnag = 0;
 
     public InGameUIScript inGameUI;
 
@@ -52,6 +54,8 @@ public class GolemController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Q)) {
             character = (Character)(((int)character + 1) % 3);
+            ability.active = false;
+            ability.available = true;
             animator.runtimeAnimatorController = (character == Steven ? StevenAnimator : (character == LorgeBoi ? LorgeBoiAnimator : SmolBoiAnimator));
             if (state != "dash" && state != "djump" && state != "ground_pound")
             {
@@ -150,13 +154,21 @@ public class GolemController : MonoBehaviour
             GetComponent<SpriteRenderer>().color = !isAttacking ? Color.white : (character == Steven ? Color.cyan : (character == LorgeBoi ? Color.yellow : Color.magenta));
         }
 
-        if ((attack.active && character == LorgeBoi) || isAttacking)
+        // Kill player if they fall too far
+        if (transform.position.y < deathY)
+            Die();
+    }
+
+    void FixedUpdate()
+    {
+        if ((attack.active && character == LorgeBoi) || !attack.available)
         {
             SetAnimator("attack");
         }
         else if (rb.velocity.x > walkSpeed + 0.1 || rb.velocity.x < -walkSpeed - 0.1)
         {
             SetAnimator("dash");
+            trySnag = 0;
         }
         else if (character == LorgeBoi && ability.active == true)
         {
@@ -170,14 +182,22 @@ public class GolemController : MonoBehaviour
                     SetAnimator("djump");
                 else if (rb.velocity.y == 0)
                 {
-                    SetAnimator("snag");
+                    if (trySnag > 0)
+                    {
+                        SetAnimator("snag");
+                    }
+                    else
+                    {
+                        trySnag++;
+                    }
                 }
                 else
                     SetAnimator("jump");
             }
             else
             {
-                SetAnimator("fall");
+                if (trySnag == 2)
+                    SetAnimator("fall");
             }
         }
         else if (rb.velocity.x > 0.1 || rb.velocity.x < -0.1)
@@ -188,10 +208,6 @@ public class GolemController : MonoBehaviour
         {
             SetAnimator("idle");
         }
-
-        // Kill player if they fall too far
-        if (transform.position.y < deathY)
-            Die();
     }
 
     KeyCode GetAbilityKey()
