@@ -22,13 +22,13 @@ public class MainMenuScript : MonoBehaviour
     // Start the game
     void StartClicked()
     {
-        SceneManager.LoadScene(PlayerPrefs.GetString("PuzzleMap"));
+        SceneManager.LoadScene("PuzzleMap");
     }
 
     // View the credits
     void CreditsClicked()
     {
-        SceneManager.LoadScene(PlayerPrefs.GetString("Credits"));
+        SceneManager.LoadScene("Credits");
     }
 
     // Quit the game when Quit is clicked

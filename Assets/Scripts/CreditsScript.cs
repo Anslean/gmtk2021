@@ -18,6 +18,6 @@ public class CreditsScript : MonoBehaviour
     // Start the game
     void BackClicked()
     {
-        SceneManager.LoadScene(PlayerPrefs.GetString("MainMenu"));
+        SceneManager.LoadScene("MainMenu");
     }
 }
