@@ -2,12 +2,13 @@
 A 2D platformer made in Unity for the Game Maker's Toolkit game jam in 2021, where the theme was "Join Together".
 
 ## Controls
-A/D - Move left/right
-Space - Jump (and double jump)
-E - Attack
-Q - Swap character
-S - Ground-pound
-Left Shift - Dash
+A/D - Move left/right  
+Space - Jump (and double jump)  
+W - Attack  
+Q - Swap character  
+S - Ground-pound  
+Left Shift - Dash  
+Escape - Pause menu  
 
 ## The Story
 Three souls are joined together within a magical artifact in the shape of a mask.  Only one soul can manifest a form at any given time, but each form has a different ability.
