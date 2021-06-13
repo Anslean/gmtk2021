@@ -20912,6 +20912,7 @@ GameObject:
   - component: {fileID: 772632176}
   - component: {fileID: 772632175}
   - component: {fileID: 772632177}
+  - component: {fileID: 772632178}
   m_Layer: 0
   m_Name: Nighthawk
   m_TagString: Untagged
@@ -21003,6 +21004,23 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &772632178
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 772632174}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61f87d329bc2c054dbb53afd8d341b4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  test1: 1
+  test2: 2
+  test3: 3
+  test4: 4
+  test5: 5
 --- !u!1 &956262113
 GameObject:
   m_ObjectHideFlags: 0
