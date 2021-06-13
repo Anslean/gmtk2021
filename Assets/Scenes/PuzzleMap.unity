@@ -8423,6 +8423,24 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8018826696628569304, guid: 0d85abf948ec3124a8b3ffa0c2d309b3, type: 3}
   m_PrefabInstance: {fileID: 409102716}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &366755037 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1952101440982752251, guid: 300e876850e1b78498f8b81fc58f82b3, type: 3}
+  m_PrefabInstance: {fileID: 1952101440769107750}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &366755043
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 366755037}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1972f68f5ab6a741958fbef8d95ae4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  songToPlay: {fileID: 8300000, guid: 2694a27a713624c4d88222da7e444aac, type: 3}
 --- !u!1001 &409102716
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8951,7 +8969,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 714811787}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 129.99, y: 41.32, z: 0}
+  m_LocalPosition: {x: 129.99, y: 41.32, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 862501296}
@@ -9110,7 +9128,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 862501295}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.480011, y: -0.23999786, z: 1}
+  m_LocalPosition: {x: -1.11, y: -0.23999786, z: 1}
   m_LocalScale: {x: 1.5, y: 1.8726563, z: 1}
   m_Children: []
   m_Father: {fileID: 714811789}
