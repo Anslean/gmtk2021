@@ -437,6 +437,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c07375d2da4df044db677c342347c0b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 4
+  minX: -20
+  maxX: 20
+  direction: 0
 --- !u!212 &529634111
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2561,6 +2565,10 @@ PrefabInstance:
     - target: {fileID: 3467978830513191912, guid: bdb3a14f2cfed0944a8f2672a0484985, type: 3}
       propertyPath: character
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3467978830513191912, guid: bdb3a14f2cfed0944a8f2672a0484985, type: 3}
+      propertyPath: dashDuration
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3467978830583612044, guid: bdb3a14f2cfed0944a8f2672a0484985, type: 3}
       propertyPath: m_Size.y

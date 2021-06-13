@@ -26,7 +26,7 @@ public class GolemController : MonoBehaviour
 
     private Rigidbody2D rb;
     private Transform t;
-    private int trySnag = 0;
+    private float trySnag = 0;
     private bool invincibleToBoss = false;
 
     public InGameUIScript inGameUI;
@@ -82,7 +82,7 @@ public class GolemController : MonoBehaviour
             }
             else
             {
-                jump.progress--;
+                jump.progress -= 60 * Time.deltaTime;
             }
         }
         else
@@ -106,13 +106,16 @@ public class GolemController : MonoBehaviour
                     break;
             }
         }
-
         jump.available = (Input.GetButtonUp("Jump") || jump.available) && Time.timeScale > 0.0f;
         float horizontal = (Input.GetAxis("Horizontal") < -0.1f ? -walkSpeed : 0) + (Input.GetAxis("Horizontal") > 0.1f ? walkSpeed : 0);
         float vertical = (jump.active && jump.progress > 0) ? jumpHeight : (rb.velocity.y < -fallSpeed ? -fallSpeed : rb.velocity.y);
         rb.velocity = new Vector2(horizontal, vertical);
         jump.active &= (jump.progress >= 1);
         dash.direction = (rb.velocity.x > 0 ? 1 : (rb.velocity.x < 0 ? -1 : dash.direction));
+    }
+
+    void FixedUpdate()
+    {
         if (dash.direction == 1)
         {
             transform.localScale = new Vector2(-1, 1);
@@ -135,7 +138,7 @@ public class GolemController : MonoBehaviour
                     rb.velocity = (dash.progress > dash.cooldown) ? new Vector2(dash.speed * dash.direction, 0) : rb.velocity;
                     ability.active = dash.progress > 0;
                     ability.available = dash.progress <= 0;
-                    dash.progress--;
+                    dash.progress -= 60 * Time.deltaTime;
                     break;
                 case Steven:
                     ability.available = false;
@@ -150,7 +153,7 @@ public class GolemController : MonoBehaviour
         {
             attack.active = attack.progress > 0;
             attack.available = attack.progress <= 0;
-            attack.progress--;
+            attack.progress -= 60 * Time.deltaTime;
             isAttacking = attack.progress > attack.cooldown;
             GetComponent<SpriteRenderer>().color = !isAttacking ? Color.white : (character == Steven ? Color.cyan : (character == LorgeBoi ? Color.yellow : Color.magenta));
         }
@@ -158,10 +161,7 @@ public class GolemController : MonoBehaviour
         // Kill player if they fall too far
         if (transform.position.y < deathY)
             Die();
-    }
 
-    void FixedUpdate()
-    {
         if ((attack.active && character == LorgeBoi) || !attack.available)
         {
             SetAnimator("attack");
@@ -189,7 +189,7 @@ public class GolemController : MonoBehaviour
                     }
                     else
                     {
-                        trySnag++;
+                        trySnag += 60 * Time.deltaTime;
                     }
                 }
                 else

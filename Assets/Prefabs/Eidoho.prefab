@@ -212,14 +212,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e823b87b7da20a4f9e60977742cb1a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpHeight: 14
+  jumpHeight: 10
   walkSpeed: 7
   fallSpeed: 12
-  attackDuration: 300
-  attackCooldown: 120
+  attackDuration: 25
+  attackCooldown: 10
   dashSpeed: 21
-  dashDuration: 120
-  dashCooldown: 120
+  dashDuration: 10
+  dashCooldown: 10
   groundPoundSpeed: 15
   character: 2
   LorgeBoiAnimator: {fileID: 9100000, guid: 9a490602616af9d4ea93792328e96072, type: 2}
