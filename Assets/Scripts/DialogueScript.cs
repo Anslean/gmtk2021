@@ -31,6 +31,7 @@ public class DialogueScript : MonoBehaviour
     // The set of all dialogue lines in the dictionary
     private string[] lines;
     // The set of lines currently being shown in the dialogue box
+    // NOTE: Currently unused, but might be useful in the future
     private string[] currentLines;
 
     private bool pendingDeath = false;
@@ -71,7 +72,7 @@ public class DialogueScript : MonoBehaviour
             else
             {
                 // Show the next line of dialogue
-                dialogueText.text = currentLines[currentPos];
+                dialogueText.text = lines[currentPos];
             }
         }
 
@@ -96,7 +97,7 @@ public class DialogueScript : MonoBehaviour
             currentLines[i] = lines[startPos + i];
 
         // Open the dialogue box
-        dialogueText.text = currentLines[currentPos];
+        dialogueText.text = lines[currentPos];
         dialogueBox.GetComponent<CanvasGroup>().alpha = 1;
         dialogueOpen = true;
 
