@@ -13115,6 +13115,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1973155875145635424, guid: bdb3a14f2cfed0944a8f2672a0484985, type: 3}
+      propertyPath: dialogueBox
+      value: 
+      objectReference: {fileID: 1143762690}
     - target: {fileID: 3467978830513189907, guid: bdb3a14f2cfed0944a8f2672a0484985, type: 3}
       propertyPath: m_Name
       value: Eidoho

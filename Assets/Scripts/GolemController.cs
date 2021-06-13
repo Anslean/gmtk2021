@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using static Character;
 
 public class GolemController : MonoBehaviour
@@ -24,6 +23,7 @@ public class GolemController : MonoBehaviour
     public InGameUIScript inGameUI;
 
     public int deathY;
+    private bool died = false;
 
     void Start()
     {
@@ -108,10 +108,7 @@ public class GolemController : MonoBehaviour
 
         // Kill player if they fall too far
         if (transform.position.y < deathY)
-        {
-            // TODO - show some epic "u died" dialogue
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        }
+            Die();
     }
 
     KeyCode GetAbilityKey()
@@ -191,6 +188,16 @@ public class GolemController : MonoBehaviour
             case Character.LorgeBoi:
                 inGameUI.SetCharacterText("Vellsua (Ground-pound)", Color.magenta);
                 break;
+        }
+    }
+
+    // Player death (show a death message and reload the scene)
+    public void Die()
+    {
+        if (!died)
+        {
+            died = true;
+            GetComponent<DialogueScript>().ShowDialogueAndDie(1, 2);
         }
     }
 }
