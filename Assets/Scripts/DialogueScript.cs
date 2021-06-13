@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// A reasonable script for handling dialogue box functionality
@@ -32,6 +33,8 @@ public class DialogueScript : MonoBehaviour
     // The set of lines currently being shown in the dialogue box
     private string[] currentLines;
 
+    private bool pendingDeath = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -51,7 +54,7 @@ public class DialogueScript : MonoBehaviour
     void Update()
     {
         // Check for continue key and handle continuing or closing the dialogue
-        if (Input.GetButtonDown("Jump"))
+        if (Input.GetButtonDown("Jump") && dialogueOpen)
         {
             currentPos++;
             if (currentPos > endPos)
@@ -60,6 +63,10 @@ public class DialogueScript : MonoBehaviour
                 dialogueBox.GetComponent<CanvasGroup>().alpha = 0;
                 dialogueOpen = false;
                 Time.timeScale = 1.0f;
+
+                // Reset the level if ShowDialogueAndDie was called
+                if (pendingDeath)
+                    SceneManager.LoadScene(SceneManager.GetActiveScene().name);
             }
             else
             {
@@ -95,5 +102,14 @@ public class DialogueScript : MonoBehaviour
 
         // Freeze time while dialogue box is open
         Time.timeScale = 0.0f;
+    }
+
+    /// <summary>
+    /// Special variant of ShowDialogue that resets the level when the dialogue box is closed
+    /// </summary>
+    public void ShowDialogueAndDie(int start, int end)
+    {
+        pendingDeath = true;
+        ShowDialogue(start, end);
     }
 }
