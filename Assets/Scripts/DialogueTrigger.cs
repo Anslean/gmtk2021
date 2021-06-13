@@ -17,12 +17,13 @@ public class DialogueTrigger : MonoBehaviour
     public int endLine = 2;
 
     // Activate dialogue upon trigger entry
-    private void OnTriggerEnter(Collider other)
+    void OnTriggerEnter2D(Collider2D other)
     {
         if (!triggered || canBeTriggeredAgain)
         {
             // Show the dialogue
             dialogueScript.ShowDialogue(startLine, endLine);
+            triggered = true;
         }
     }
 }

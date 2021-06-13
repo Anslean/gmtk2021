@@ -962,10 +962,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Eidoho
       objectReference: {fileID: 0}
-    - target: {fileID: 3467978830513189909, guid: bdb3a14f2cfed0944a8f2672a0484985, type: 3}
-      propertyPath: m_CollisionDetection
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3467978830513189911, guid: bdb3a14f2cfed0944a8f2672a0484985, type: 3}
       propertyPath: m_RootOrder
       value: 4
