@@ -7,6 +7,7 @@ public class GolemController : MonoBehaviour
 {
     public float jumpHeight;
     public float walkSpeed, fallSpeed;
+    public float attackDuration, attackCooldown;
 
     public float dashSpeed, dashDuration, dashCooldown;
     public float groundPoundSpeed;
@@ -20,6 +21,7 @@ public class GolemController : MonoBehaviour
     private (bool active, bool available, bool aerial, float progress, float height) jump;
     private (bool active, bool available) ability = (false, true);
     private (float direction, float progress, float speed, float duration, float cooldown) dash;
+    private (bool active, bool available, float progress, float duration, float cooldown) attack;
 
     private Rigidbody2D rb;
     private Transform t;
@@ -39,6 +41,7 @@ public class GolemController : MonoBehaviour
 
         jump = (false, true, false, -1, jumpHeight);
         dash = (1, -1, dashSpeed, dashDuration, dashCooldown);
+        attack = (false, true, -1, attackDuration, attackCooldown);
         animator.runtimeAnimatorController = (character == Steven ? StevenAnimator : (character == LorgeBoi ? LorgeBoiAnimator : SmolBoiAnimator));
 
         if (inGameUI != null)
@@ -56,6 +59,12 @@ public class GolemController : MonoBehaviour
             }
             if (inGameUI != null)
                 UpdateCharacterLabel();
+        }
+
+        if (Input.GetKeyDown(KeyCode.W) && attack.progress <= 0)
+        {
+            attack.active = true;
+            attack.progress = attack.duration + attack.cooldown;
         }
 
         if (Input.GetButton("Jump") && Time.timeScale > 0.0f)
@@ -132,7 +141,20 @@ public class GolemController : MonoBehaviour
             }
         }
 
-        if (rb.velocity.x > walkSpeed + 0.1 || rb.velocity.x < -walkSpeed - 0.1)
+        if (attack.active)
+        {
+            attack.active = attack.progress > 0;
+            attack.available = attack.progress <= 0;
+            attack.progress--;
+            isAttacking = attack.progress > attack.cooldown;
+            GetComponent<SpriteRenderer>().color = !isAttacking ? Color.white : (character == Steven ? Color.cyan : (character == LorgeBoi ? Color.yellow : Color.magenta));
+        }
+
+        if ((attack.active && character == LorgeBoi) || isAttacking)
+        {
+            SetAnimator("attack");
+        }
+        else if (rb.velocity.x > walkSpeed + 0.1 || rb.velocity.x < -walkSpeed - 0.1)
         {
             SetAnimator("dash");
         }
