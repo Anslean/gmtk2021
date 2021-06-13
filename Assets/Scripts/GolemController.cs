@@ -16,7 +16,6 @@ public class GolemController : MonoBehaviour
     private (bool active, bool available, bool aerial, float progress, float height) jump;
     private (bool active, bool available) ability = (false, true);
     private (float direction, float progress, float speed, float duration, float cooldown) dash;
-    private ((int count, Collider2D nearest) magic, (int count, Collider2D nearest) sturdy, (int count, Collider2D nearest) tricky) objects;
 
     private Rigidbody2D rb;
     private Transform t;
@@ -25,11 +24,9 @@ public class GolemController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         t = rb.transform;
-        Debug.Log(character);
 
         jump = (false, true, false, -1, jumpHeight);
         dash = (1, -1, dashSpeed, dashDuration, dashCooldown);
-        objects = ((0, new Collider2D()), (0, new Collider2D()), (0, new Collider2D()));
     }
 
     void Update()
@@ -120,41 +117,6 @@ public class GolemController : MonoBehaviour
                 break;
         }
         return key;
-    }
-
-    void OnTriggerEnter2D(Collider2D col)
-    {
-        if (col.tag == "magic")
-        {
-            objects.magic.count++;
-            objects.magic.nearest = col;
-        }
-        else if (col.tag == "sturdy")
-        {
-            objects.sturdy.count++;
-            objects.sturdy.nearest = col;
-        }
-        else if (col.tag == "tricky")
-        {
-            objects.tricky.count++;
-            objects.tricky.nearest = col;
-        }
-    }
-
-    void OnTriggerExit2D(Collider2D col)
-    {
-        if (col.tag == "magic")
-        {
-            objects.magic.count--;
-        }
-        else if (col.tag == "sturdy")
-        {
-            objects.sturdy.count--;
-        }
-        else if (col.tag == "tricky")
-        {
-            objects.tricky.count--;
-        }
     }
 
     void OnCollisionEnter2D(Collision2D col)
