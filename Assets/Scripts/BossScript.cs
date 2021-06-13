@@ -18,11 +18,10 @@ public class BossScript : MonoBehaviour
      * The new move frequency becomes 20/20/30/30 (horizontal/vertical/gust/flare).
      * Play animation when boss dies.
      */
-    public int test1 = 1;
-    public int test2 = 2;
-    public int test3 = 3;
-    public int test4 = 4;
-    public int test5 = 5;
+    
+    public RuntimeAnimatorController bossAnimator;
+    public Animator animator;
+    private string state;
 
     void Start()
     {
@@ -33,6 +32,23 @@ public class BossScript : MonoBehaviour
     void Update()
     {
         
+    }
+
+    void SetAnimator(string leave)
+    {
+        if (leave != "idle")
+            animator.SetBool("idle", false);
+        if (leave != "attacking_horizontal")
+            animator.SetBool("attacking_horizontal", false);
+        if (leave != "attacking_vertical")
+            animator.SetBool("attacking_vertical", false);
+        if (leave != "attacking_orbGust")
+            animator.SetBool("attacking_orbGust", false);
+        if (leave != "attacking_orbFlare")
+            animator.SetBool("attacking_orbFlare", false);
+        if (!animator.GetBool(leave))
+            animator.SetBool(leave, true);
+        state = leave;
     }
 
     void FixedUpdate()
