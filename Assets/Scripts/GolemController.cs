@@ -29,6 +29,9 @@ public class GolemController : MonoBehaviour
     public int deathY;
     private bool died = false;
 
+    [HideInInspector]
+    public bool isAttacking = false;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -37,6 +40,9 @@ public class GolemController : MonoBehaviour
         jump = (false, true, false, -1, jumpHeight);
         dash = (1, -1, dashSpeed, dashDuration, dashCooldown);
         animator.runtimeAnimatorController = (character == Steven ? StevenAnimator : (character == LorgeBoi ? LorgeBoiAnimator : SmolBoiAnimator));
+
+        if (inGameUI != null)
+            UpdateCharacterLabel();
     }
 
     void Update()
@@ -108,6 +114,7 @@ public class GolemController : MonoBehaviour
             {
                 case LorgeBoi:
                     rb.velocity = new Vector2(0, -groundPoundSpeed);
+                    isAttacking = true;
                     ability.available = false;
                     break;
                 case SmolBoi:
@@ -221,6 +228,7 @@ public class GolemController : MonoBehaviour
                     ability.available = true;
                     ability.active = false;
                 }
+                isAttacking = false;
             }
         }
         else if (col.otherCollider.tag == "head")
