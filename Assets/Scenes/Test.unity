@@ -362,7 +362,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6673700677156011232, guid: 0d85abf948ec3124a8b3ffa0c2d309b3, type: 3}
       propertyPath: maxX
-      value: 1
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6673700677156011232, guid: 0d85abf948ec3124a8b3ffa0c2d309b3, type: 3}
+      propertyPath: minX
+      value: -4
       objectReference: {fileID: 0}
     - target: {fileID: 8018826696628569304, guid: 0d85abf948ec3124a8b3ffa0c2d309b3, type: 3}
       propertyPath: m_RootOrder
