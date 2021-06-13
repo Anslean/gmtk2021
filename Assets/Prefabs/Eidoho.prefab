@@ -160,8 +160,12 @@ MonoBehaviour:
   dashSpeed: 21
   dashDuration: 120
   dashCooldown: 120
-  groundPoundSpeed: 30
+  groundPoundSpeed: 15
   character: 2
+  LorgeBoiAnimator: {fileID: 9100000, guid: 9a490602616af9d4ea93792328e96072, type: 2}
+  SmolBoiAnimator: {fileID: 9100000, guid: 3adbe070f0c5bff4dacb095b706fbc79, type: 2}
+  StevenAnimator: {fileID: 9100000, guid: a33bb245525187945b2b0896e03c67ac, type: 2}
+  animator: {fileID: 6574997053859621801}
   inGameUI: {fileID: 0}
   deathY: -9
 --- !u!114 &1973155875145635424

@@ -12,6 +12,10 @@ public class GolemController : MonoBehaviour
     public float groundPoundSpeed;
 
     public Character character;
+    public RuntimeAnimatorController LorgeBoiAnimator, SmolBoiAnimator, StevenAnimator;
+
+    public Animator animator;
+    private string state;
 
     private (bool active, bool available, bool aerial, float progress, float height) jump;
     private (bool active, bool available) ability = (false, true);
@@ -32,13 +36,20 @@ public class GolemController : MonoBehaviour
 
         jump = (false, true, false, -1, jumpHeight);
         dash = (1, -1, dashSpeed, dashDuration, dashCooldown);
+        animator.runtimeAnimatorController = (character == Steven ? StevenAnimator : (character == LorgeBoi ? LorgeBoiAnimator : SmolBoiAnimator));
     }
 
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Q)) {
             character = (Character)(((int)character + 1) % 3);
-            UpdateCharacterLabel();
+            animator.runtimeAnimatorController = (character == Steven ? StevenAnimator : (character == LorgeBoi ? LorgeBoiAnimator : SmolBoiAnimator));
+            if (state != "dash" && state != "djump" && state != "ground_pound")
+            {
+                SetAnimator(state);
+            }
+            if (inGameUI != null)
+                UpdateCharacterLabel();
         }
 
         if (Input.GetButton("Jump") && Time.timeScale > 0.0f)
@@ -82,6 +93,14 @@ public class GolemController : MonoBehaviour
         rb.velocity = new Vector2(horizontal, vertical);
         jump.active &= (jump.progress >= 1);
         dash.direction = (rb.velocity.x > 0 ? 1 : (rb.velocity.x < 0 ? -1 : dash.direction));
+        if (dash.direction == 1)
+        {
+            transform.localScale = new Vector2(-1, 1);
+        }
+        else
+        {
+            transform.localScale = new Vector2(1, 1);
+        }
 
         if (ability.active)
         {
@@ -106,6 +125,41 @@ public class GolemController : MonoBehaviour
             }
         }
 
+        if (rb.velocity.x > walkSpeed + 0.1 || rb.velocity.x < -walkSpeed - 0.1)
+        {
+            SetAnimator("dash");
+        }
+        else if (character == LorgeBoi && ability.active == true)
+        {
+            SetAnimator("ground_pound");
+        }
+        else if (jump.aerial)
+        {
+            if (rb.velocity.y > -fallSpeed / 2)
+            {
+                if (character == Steven && !ability.available)
+                    SetAnimator("djump");
+                else if (rb.velocity.y == 0)
+                {
+                    SetAnimator("snag");
+                }
+                else
+                    SetAnimator("jump");
+            }
+            else
+            {
+                SetAnimator("fall");
+            }
+        }
+        else if (rb.velocity.x > 0.1 || rb.velocity.x < -0.1)
+        {
+            SetAnimator("walk");
+        }
+        else
+        {
+            SetAnimator("idle");
+        }
+
         // Kill player if they fall too far
         if (transform.position.y < deathY)
             Die();
@@ -127,6 +181,31 @@ public class GolemController : MonoBehaviour
                 break;
         }
         return key;
+    }
+
+    void SetAnimator(string leave)
+    {
+        if (leave != "idle")
+            animator.SetBool("idle", false);
+        if (leave != "walk")
+            animator.SetBool("walk", false);
+        if (leave != "jump")
+            animator.SetBool("jump", false);
+        if (leave != "fall")
+            animator.SetBool("fall", false);
+        if (leave != "djump" && character == Steven)
+            animator.SetBool("djump", false);
+        if (leave != "dash" && character == SmolBoi)
+            animator.SetBool("dash", false);
+        if (leave != "ground_pound" && character == LorgeBoi)
+            animator.SetBool("ground_pound", false);
+        if (leave != "attack")
+            animator.SetBool("attack", false);
+        if (leave != "snag")
+            animator.SetBool("snag", false);
+        if (!animator.GetBool(leave))
+            animator.SetBool(leave, true);
+        state = leave;
     }
 
     void OnCollisionEnter2D(Collision2D col)
