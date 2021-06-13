@@ -1,3 +1,25 @@
-Welcome to the tutorial lol
-There isn't a tutorial.
-Go play with your knives or something.
+On the stone is engraved a message...
+"Three souls were joined together, bound in a mask-like artifact."
+"Each soul manifests a different form, each with a different power."
+"Together they fight to restore the lost, and save the souls of the innocent."
+
+
+The legends speak of a swift young shrike, blue in hue and fierce in spirit.
+Her name was Bree, her speed unmatched.  Able to dash through the air and outpace her foes.
+She excelled in aerial combat and agility, but was struck down in her recklessness.
+
+Myths tell of a bright owl scholar, yellow in tone and demeanor.
+His name was Ellistair, who sought arcane secrets untold but found only ruin.
+He flew with his research and reached great heights, but fell to his own lust for knowledge.
+
+Tales have been told of a powerful vulture, purple in color and towering over all.
+Her name was Vellsua, a foreigner from afar seeking solace from the past.
+She strived for reform, but was haunted and hated by those she left behind.
+
+--plotpoint: Ellistair discovered the method of stealing souls
+--
+--
+
+--plotpoint: Nighthawk stole souls of innocents to gain power
+--
+--
