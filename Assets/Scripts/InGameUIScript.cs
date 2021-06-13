@@ -13,6 +13,8 @@ public class InGameUIScript : MonoBehaviour
     public Button quitButton;
     public Slider volumeSlider;
 
+    public Text characterText;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -73,5 +75,12 @@ public class InGameUIScript : MonoBehaviour
     void ChangeVolume(float vol)
     {
         AudioListener.volume = vol;
+    }
+
+    // Change the character label and color
+    public void SetCharacterText(string name, Color color)
+    {
+        characterText.text = name;
+        characterText.color = color;
     }
 }

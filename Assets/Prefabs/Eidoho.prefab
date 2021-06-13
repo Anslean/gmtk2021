@@ -72,7 +72,7 @@ GameObject:
   - component: {fileID: 3467978830513191912}
   m_Layer: 0
   m_Name: Eidoho
-  m_TagString: Untagged
+  m_TagString: body
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -211,6 +211,8 @@ MonoBehaviour:
   dashCooldown: 120
   groundPoundSpeed: 30
   character: 0
+  inGameUI: {fileID: 0}
+  deathY: -10
 --- !u!1 &3467978830583612042
 GameObject:
   m_ObjectHideFlags: 0
