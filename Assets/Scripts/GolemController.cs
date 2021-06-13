@@ -27,6 +27,7 @@ public class GolemController : MonoBehaviour
     private Rigidbody2D rb;
     private Transform t;
     private int trySnag = 0;
+    private bool invincibleToBoss = false;
 
     public InGameUIScript inGameUI;
 
@@ -228,6 +229,16 @@ public class GolemController : MonoBehaviour
         return key;
     }
 
+    public void makeInvincibleToBoss()
+    {
+        invincibleToBoss = true;
+    }
+
+    public bool isInvincibleToBoss()
+    {
+        return invincibleToBoss;
+    }
+
     void SetAnimator(string leave)
     {
         if (leave != "idle")
@@ -267,6 +278,7 @@ public class GolemController : MonoBehaviour
                     ability.active = false;
                 }
                 isAttacking = false;
+                invincibleToBoss = false;
             }
         }
         else if (col.otherCollider.tag == "head")
