@@ -53,7 +53,8 @@ public class GolemController : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Q)) {
+        // Character swapping
+        if (Input.GetButtonDown("Swap")) {
             character = (Character)(((int)character + 1) % 3);
             ability.active = false;
             ability.available = true;
@@ -65,13 +66,15 @@ public class GolemController : MonoBehaviour
             if (inGameUI != null)
                 UpdateCharacterLabel();
         }
-
-        if (Input.GetKeyDown(KeyCode.W) && attack.progress <= 0)
+        
+        // Attacking
+        if (Input.GetButtonDown("Attack") && attack.progress <= 0)
         {
             attack.active = true;
             attack.progress = attack.duration + attack.cooldown;
         }
 
+        // Jumping
         if (Input.GetButton("Jump") && Time.timeScale > 0.0f)
         {
             if (!jump.aerial && jump.available)
@@ -90,41 +93,43 @@ public class GolemController : MonoBehaviour
             jump.progress = -1;
         }
 
-        if (Input.GetKeyDown(GetAbilityKey()))
+        // Special abilities
+        if (Input.GetButtonDown("Special"))
         {
-            switch (character)
+            if (character == LorgeBoi)
             {
-                case LorgeBoi:
-                    ability.active |= jump.aerial && ability.available;
-                    break;
-                case SmolBoi:
-                    ability.active = true;
-                    dash.progress = (dash.progress <= 0) ? dash.duration + dash.cooldown : dash.progress;
-                    break;
-                case Steven:
-                    ability.active |= jump.aerial && ability.available;
-                    break;
+                ability.active |= jump.aerial && ability.available;
+            }
+            else if (character == SmolBoi)
+            {
+                ability.active = true;
+                dash.progress = (dash.progress <= 0) ? dash.duration + dash.cooldown : dash.progress;
             }
         }
-        jump.available = (Input.GetButtonUp("Jump") || jump.available) && Time.timeScale > 0.0f;
+        if (Input.GetButtonDown("Jump") && character == Steven)
+        {
+            ability.active |= jump.aerial && ability.available;
+        }
+
+        // Directional movement
         float horizontal = (Input.GetAxis("Horizontal") < -0.1f ? -walkSpeed : 0) + (Input.GetAxis("Horizontal") > 0.1f ? walkSpeed : 0);
         float vertical = (jump.active && jump.progress > 0) ? jumpHeight : (rb.velocity.y < -fallSpeed ? -fallSpeed : rb.velocity.y);
         rb.velocity = new Vector2(horizontal, vertical);
+
+        jump.available = (Input.GetButtonUp("Jump") || jump.available) && Time.timeScale > 0.0f;
         jump.active &= (jump.progress >= 1);
+
         dash.direction = (rb.velocity.x > 0 ? 1 : (rb.velocity.x < 0 ? -1 : dash.direction));
     }
 
     void FixedUpdate()
     {
         if (dash.direction == 1)
-        {
             transform.localScale = new Vector2(-1, 1);
-        }
         else
-        {
             transform.localScale = new Vector2(1, 1);
-        }
 
+        // Special ability
         if (ability.active)
         {
             switch (character)
@@ -149,19 +154,21 @@ public class GolemController : MonoBehaviour
             }
         }
 
+        // Attack
         if (attack.active)
         {
             attack.active = attack.progress > 0;
             attack.available = attack.progress <= 0;
             attack.progress -= 60 * Time.deltaTime;
             isAttacking = attack.progress > attack.cooldown;
-            GetComponent<SpriteRenderer>().color = !isAttacking ? Color.white : (character == Steven ? Color.cyan : (character == LorgeBoi ? Color.yellow : Color.magenta));
+            //GetComponent<SpriteRenderer>().color = !isAttacking ? Color.white : (character == Steven ? Color.cyan : (character == LorgeBoi ? Color.yellow : Color.magenta));
         }
 
         // Kill player if they fall too far
         if (transform.position.y < deathY)
             Die();
 
+        // Set animator based on player state
         if ((attack.active && character == LorgeBoi) || !attack.available)
         {
             SetAnimator("attack");
@@ -211,6 +218,7 @@ public class GolemController : MonoBehaviour
         }
     }
 
+    // Obsolete - Replaced by InputManager check with simpler control scheme
     KeyCode GetAbilityKey()
     {
         KeyCode key = KeyCode.A;
